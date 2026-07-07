@@ -46,13 +46,6 @@ pip install -r requirements.txt
 
 Paste a sample of your app's CLI or Streamlit output here so a reader can see what a generated plan looks like:
 
-```
-# e.g.:
-# Daily plan for Biscuit (Golden Retriever):
-#   08:00 — Morning walk (30 min) [priority: high]
-#   09:00 — Feeding (10 min) [priority: high]
-#   ...
-```
 Today's Schedule
 =================
 Mochi (pet-1) - Morning feeding | 08:00 | 10 min | completed=False
@@ -70,22 +63,31 @@ pytest
 pytest --cov
 ```
 
-Sample test output:
+test output:
+========== test session starts ===========
+platform win32 -- Python 3.13.2, pytest-9.0.3, pluggy-1.6.0 -- C:\Python313\python.exe
+i110-module2show-pawpal-starter
+plugins: anyio-4.13.0, cov-7.1.0
+collected 2 items                         
 
-```
-# Paste your pytest output here
-```
+tests/test_pawpal.py::test_task_completion PASSED [ 50%]
+tests/test_pawpal.py::test_task_addition PASSED [100%]
+
+=========== 2 passed in 0.03s ============
+PS C:\Users\mathi\projects\a110 NEW\ai110-module2show-pawpal-starter> 
+
 
 ## 📐 Smarter Scheduling
 
-> Fill in once you've implemented scheduling logic.
+The PawPal+ scheduler includes several advanced features to help pet owners manage their tasks efficiently:
 
 | Feature | Method(s) | Notes |
 |---------|-----------|-------|
-| Task sorting | | e.g., by priority, duration |
-| Filtering | | e.g., skip tasks if time runs out |
-| Conflict handling | | e.g., overlapping time slots |
-| Recurring tasks | | e.g., daily vs. weekly |
+| Task sorting by time | `Scheduler.sort_by_time()` | Sorts tasks chronologically using Timsort algorithm (O(n log n)). Tasks without scheduled times are placed at the end using a sentinel value. |
+| Task filtering | `Scheduler.filter_tasks()` | Filters tasks by completion status (completed/incomplete) and/or pet name using linear search (O(n)). Both filters can be used together or independently. |
+| Conflict detection | `Scheduler.detect_conflicts()` | Detects scheduling conflicts using pairwise comparison algorithm (O(n²)). Identifies when two tasks for the same or different pets are scheduled at the exact same time. Returns warning messages rather than crashing. |
+| Recurring task creation | `Task.create_next_occurrence()` | Automatically generates next occurrence for daily/weekly tasks using timedelta arithmetic. Daily adds 1 day, weekly adds 7 days to scheduled time. Returns None for "once" frequency tasks. |
+| Recurring task completion | `Pet.complete_task()` | Marks a task complete and automatically creates the next occurrence if the task is recurring. Searches for incomplete tasks by description (O(n)). |
 
 ## 📸 Demo Walkthrough
 
