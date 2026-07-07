@@ -16,7 +16,7 @@ User: Stores personal info, time windows (sleep/work), preferences and  constrai
 
 Pet: pets name, species, age and care needs plus repsective default durations and priority weights.
 
-Activity: Info about each task; serializable for storage and display.
+Task: Info about each task; serializable for storage and display.
 
 Constraint: Time window rules and input constraints set by scheduler.
 
@@ -24,19 +24,21 @@ Scheduler: logic that generates a conflict aware timeline considering priorities
 
 Schedule: Timeline data containing Activity; includes methods to add/remove/query and handle conflicts
 
-Dashboard: UI/CLI layer that gathers user input, shows the generated schedule, accepts edits, and triggers re-scheduling.
-
 Storage: Persistence layer to save/load users, pets, and schedules (e.g., JSON file wrapper).
 
-Notifier (optional): Handles reminders/alerts and integration with system notifications or logs.
-
-
+"Task", "Pet", "Constraints", "ScheduleEntry", "User", "Scheduler"]
 
 **b. Design changes**
 
 - Did your design change during implementation?
+
+yes
+
 - If yes, describe at least one change and why you made it.
 
+for example i was going to implement a UI haning class to handle a dashboard and also a storage class to help load and save, but since its a streamlit app, I decided that dashboard class is redundant and storage class is overkill.
+
+Also I revamped the schedule/scheduler classes into scheduleentry/scheduler for semantic clarity, and implemented the constraints and time logic along the way because it was useless when generated
 ---
 
 ## 2. Scheduling Logic and Tradeoffs

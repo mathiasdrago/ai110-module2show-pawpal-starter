@@ -53,6 +53,12 @@ Paste a sample of your app's CLI or Streamlit output here so a reader can see wh
 #   09:00 — Feeding (10 min) [priority: high]
 #   ...
 ```
+Today's Schedule
+=================
+Mochi (pet-1) - Morning feeding | 08:00 | 10 min | completed=False
+Mochi (pet-1) - Litter box cleanup | 09:30 | 15 min | completed=False
+Biscuit (pet-2) - Morning walk | 07:30 | 30 min | completed=False
+
 
 ## 🧪 Testing PawPal+
 
